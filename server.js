@@ -9,11 +9,7 @@ server.on("request", (req,res)=>{
     if(req.url === "/create"){
         let generatedUrl = generateUrl();
         res.end(`<body>${generatedUrl} is your new URL !<a href="/url/${generatedUrl}">check it out!</a></body>`);
-    }else if(req.url === "/cmap"){
-        let generatedUrl = generateUrlMAP();
-        res.end(`${generatedUrl} is your new URL (MAP) !`);
-    }
-    else if (req.url.startsWith('/url/')){
+    }else if (req.url.startsWith('/url/')){
         let url = req.url.split('/')[2];
         console.log(url);
         if (url.length != NUMBEROFCHAR){
@@ -35,10 +31,10 @@ server.listen(port, ()=>{
     console.log(`Server running on port ${port}`);
 })
 function generateUrl() {
-    let alphabet = "abcdefghijklmnopqrstuvwxyz";
+    let alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
     let generatedUrl ="";
     for(i = 0; i<NUMBEROFCHAR; i++){
-        let randInt = Math.floor(Math.random()*26);
+        let randInt = Math.floor(Math.random()*alphabet.length);
         generatedUrl += alphabet[randInt];
     }
     if (generatedUrl in urls){
